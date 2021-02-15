@@ -1,0 +1,7 @@
+name: EnergyTools
+version: ${project.version}
+main: EnergyTools
+api-version: 1.14
+authors: [hoangvta]
+depend: [Slimefun]
+softdepend: [LiteXpansion]
