@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EnergyTools extends JavaPlugin implements SlimefunAddon {
 
-    public static EnergyTools instance;
+    private static EnergyTools instance;
 
     @Override
     public void onEnable() {
