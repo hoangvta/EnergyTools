@@ -20,7 +20,7 @@ public final class EnergyTools extends JavaPlugin implements SlimefunAddon {
             saveDefaultConfig();
         }
         ItemSetup.INSTANCE.init();
-
+        getServer().getPluginManager().registerEvents(new Event(), this);
     }
 
     @Override

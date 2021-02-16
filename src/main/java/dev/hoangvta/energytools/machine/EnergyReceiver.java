@@ -87,7 +87,6 @@ public class EnergyReceiver extends SlimefunItem implements InventoryBlock, Ener
         ItemMeta im = input.getItemMeta();
         List<String> lores = im.getLore();
         String loc = lores.get(2);
-        String linkedLocation = "&4Unknown!";
         if (loc.equals("")) {
             inv.replaceExistingItem(LINKED_SLOT, linkedItem);
             return;
