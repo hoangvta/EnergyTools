@@ -1,3 +1,3 @@
 # EnergyTools
 
-Small project by hoangvta
+Small slimefun addon by hoangvta
