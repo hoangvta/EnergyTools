@@ -3,6 +3,7 @@ package dev.hoangvta.energytools.machine;
 import dev.hoangvta.energytools.Items;
 import dev.j3fftw.litexpansion.extrautils.interfaces.InventoryBlock;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -35,9 +36,9 @@ public class EnergyReceiver extends SlimefunItem implements InventoryBlock, Ener
     public EnergyReceiver() {
         super(Items.ENERGYTOOLS, Items.ENERGY_RECEIVER,
             RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-                    null, null, null,
-                    null, Items.ENERGY_RECEIVER, null,
-                    null, null, null
+                    dev.j3fftw.litexpansion.Items.CARBON_PLATE, SlimefunItems.GPS_TRANSMITTER_4, dev.j3fftw.litexpansion.Items.CARBON_PLATE,
+                    dev.j3fftw.litexpansion.Items.THORIUM_PLATE, dev.j3fftw.litexpansion.Items.MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT, dev.j3fftw.litexpansion.Items.THORIUM_PLATE,
+                    SlimefunItems.REINFORCED_PLATE, dev.j3fftw.litexpansion.Items.IRIDIUM_PLATE, SlimefunItems.REINFORCED_PLATE
                 });
         setupInv();
     }

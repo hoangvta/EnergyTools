@@ -2,6 +2,7 @@ package dev.hoangvta.energytools.items;
 
 import dev.hoangvta.energytools.Items;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import dev.hoangvta.energytools.machine.EnergyTransmitter;
@@ -14,21 +15,16 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TransmittingCard extends SimpleSlimefunItem<ItemUseHandler> {
 
-    private Map<Block, String> cardID = new HashMap<>();
-
     public TransmittingCard() {
         super (Items.ENERGYTOOLS, Items.TRANSMITTING_CARD,
-                // not complete recipe
                 RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-                        null, null, null,
-                        null, Items.TRANSMITTING_CARD, null,
-                        null, null, null
+                        dev.j3fftw.litexpansion.Items.IRIDIUM, SlimefunItems.GPS_TRANSMITTER, dev.j3fftw.litexpansion.Items.IRIDIUM,
+                        dev.j3fftw.litexpansion.Items.GOLD_PLATE, SlimefunItems.GPS_MARKER_TOOL, dev.j3fftw.litexpansion.Items.GOLD_PLATE,
+                        null, dev.j3fftw.litexpansion.Items.GOLD_PLATE, null
                 }
                 );
     }
