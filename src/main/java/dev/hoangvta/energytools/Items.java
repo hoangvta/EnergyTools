@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 public final class Items {
     public static final Category ENERGYTOOLS = new Category(
             new NamespacedKey(EnergyTools.getInstance(), "energytools"),
-            new CustomItem(new ItemStack(Material.FURNACE_MINECART, 1), "&7Energy Tools")
+            new CustomItem(new ItemStack(Material.SMOKER, 1), "&7Energy Tools")
     );
 
     public static final SlimefunItemStack ENERGY_TRANSMITTER = new SlimefunItemStack(
