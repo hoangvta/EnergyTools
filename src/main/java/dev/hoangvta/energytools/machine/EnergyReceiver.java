@@ -1,5 +1,7 @@
 package dev.hoangvta.energytools.machine;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import dev.hoangvta.energytools.Items;
 import dev.j3fftw.litexpansion.extrautils.interfaces.InventoryBlock;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
@@ -18,11 +20,9 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.libs.jline.internal.Nullable;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public class EnergyReceiver extends SlimefunItem implements InventoryBlock, EnergyNetProvider {
@@ -70,7 +70,7 @@ public class EnergyReceiver extends SlimefunItem implements InventoryBlock, Ener
         });
     }
 
-    private void tick(@Nonnull Block b) {
+    private void tick(@NotNull Block b) {
         @Nullable final BlockMenu inv = BlockStorage.getInventory(b);
         if (inv == null) {
             return;
@@ -120,7 +120,7 @@ public class EnergyReceiver extends SlimefunItem implements InventoryBlock, Ener
     }
 
     @Override
-    public int getGeneratedOutput(@Nonnull Location l, @Nonnull Config config) {
+    public int getGeneratedOutput(@NotNull Location l, @NotNull Config config) {
         @Nullable final BlockMenu inv = BlockStorage.getInventory(l);
         if (inv == null) return 0;
 

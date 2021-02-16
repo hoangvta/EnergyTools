@@ -1,7 +1,6 @@
 name: EnergyTools
 version: ${project.version}
-main: EnergyTools
+main: dev.hoangvta.energytools.EnergyTools
 api-version: 1.14
 authors: [hoangvta]
-depend: [Slimefun]
-softdepend: [LiteXpansion]
+depend: [Slimefun, LiteXpansion]

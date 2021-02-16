@@ -1,5 +1,6 @@
 package dev.hoangvta.energytools.items;
 
+import com.sun.istack.internal.NotNull;
 import dev.hoangvta.energytools.Items;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
@@ -14,7 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public class TransmittingCard extends SimpleSlimefunItem<ItemUseHandler> {
@@ -30,7 +30,7 @@ public class TransmittingCard extends SimpleSlimefunItem<ItemUseHandler> {
     }
 
     @Override
-    @Nonnull
+    @NotNull
     public ItemUseHandler getItemHandler() {
         return e -> {
             e.getInteractEvent().setCancelled(true);

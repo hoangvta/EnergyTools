@@ -42,6 +42,6 @@ public final class Items {
             "&5Linking two energy network together",
             ""
     );
-    
+
     private Items() {}
 }
