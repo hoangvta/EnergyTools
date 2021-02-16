@@ -1,7 +1,0 @@
-name: EnergyTools
-version: 0.1-alpha_test
-main: EnergyTools
-api-version: 1.14
-authors: [hoangvta]
-depend: [Slimefun]
-softdepend: [LiteXpansion]
