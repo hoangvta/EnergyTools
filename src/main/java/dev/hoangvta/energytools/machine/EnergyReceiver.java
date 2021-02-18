@@ -5,10 +5,14 @@ import com.sun.istack.internal.Nullable;
 import dev.hoangvta.energytools.Items;
 import dev.j3fftw.litexpansion.extrautils.interfaces.InventoryBlock;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
+import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
+import io.github.thebusybiscuit.slimefun4.core.services.localization.SlimefunLocalization;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunBlockHandler;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -103,9 +107,9 @@ public class EnergyReceiver extends SlimefunItem implements InventoryBlock, Ener
         int y = Integer.parseInt(loc.split(" Y: ")[1].split(" Z: ")[0]);
         int z = Integer.parseInt(loc.split(" Z: ")[1]);
 
-        Block block = world.getBlockAt(x, y, z);
+        CustomItem panel = new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&7Linked unit: " + loc);
 
-        inv.replaceExistingItem(LINKED_SLOT, new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&7Linked unit: " + loc));
+        inv.replaceExistingItem(LINKED_SLOT, panel);
     }
 
     @Override
@@ -130,8 +134,8 @@ public class EnergyReceiver extends SlimefunItem implements InventoryBlock, Ener
         if (input == null) return 0;
 
         ItemMeta im = input.getItemMeta();
-        List<String> lores = im.getLore();
-        String loc = lores.get(2);
+        List<String> lore = im.getLore();
+        String loc = lore.get(2);
 
         final int stored = getCharge(l);
         final boolean canGenerate = stored < getCapacity();
@@ -143,20 +147,28 @@ public class EnergyReceiver extends SlimefunItem implements InventoryBlock, Ener
         int y = Integer.parseInt(loc.split(" Y: ")[1].split(" Z: ")[0]);
         int z = Integer.parseInt(loc.split(" Z: ")[1]);
 
+        if (world == null) {
+            return 0;
+        }
+
         Block send = world.getBlockAt(x, y, z);
+
         final int rate = canGenerate ? getGeneratingAmount(send.getLocation(), l) : 0;
+
         return rate;
     }
 
     private int getGeneratingAmount(Location send, Location receive) {
-        int chargeableAmount = getCharge(send);
-        int currentAmount = getCharge(receive);
-        int goingToCharge = chargeableAmount - currentAmount;
-        if (currentAmount > chargeableAmount) goingToCharge = chargeableAmount;
-        if (goingToCharge > CAPACITY) goingToCharge = CAPACITY - currentAmount;
-        removeCharge(send, goingToCharge);
 
-        return goingToCharge;
+        int senderCanSendAmount = getCharge(send);
+        final boolean canCharge = senderCanSendAmount > 0;
+
+        int receiverHasAmount = getCharge(receive);
+        int receiverCanChargingAmount =  senderCanSendAmount;
+        if (receiverCanChargingAmount > CAPACITY) receiverCanChargingAmount = CAPACITY - receiverHasAmount;
+        if (canCharge) removeCharge(send, receiverCanChargingAmount);
+
+        return receiverCanChargingAmount;
     }
 
     @Override
@@ -164,5 +176,13 @@ public class EnergyReceiver extends SlimefunItem implements InventoryBlock, Ener
         return CAPACITY;
     }
 
+    @Override
+    public EnergyNetComponentType getEnergyComponentType() {
+        return EnergyNetComponentType.GENERATOR;
+    }
 
+    @Override
+    public boolean willExplode(@NotNull Location l, @NotNull Config data) {
+        return false;
+    }
 }
