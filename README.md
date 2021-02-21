@@ -4,7 +4,7 @@ This addon add some end-game machines.
 
 # Downloads
 
-update later.
+https://github.com/hoangvta/EnergyTools/releases/
 
 # Requirement
 Minecraft version: 1.14+
