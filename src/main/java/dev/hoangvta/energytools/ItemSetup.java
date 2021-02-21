@@ -1,9 +1,8 @@
 package dev.hoangvta.energytools;
 
+import dev.hoangvta.energytools.machine.*;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import dev.hoangvta.energytools.items.TransmittingCard;
-import dev.hoangvta.energytools.machine.EnergyReceiver;
-import dev.hoangvta.energytools.machine.EnergyTransmitter;
 
 public class ItemSetup {
     static final ItemSetup INSTANCE = new ItemSetup();
@@ -31,5 +30,8 @@ public class ItemSetup {
     private void registerMachines() {
         new EnergyTransmitter().register(plugin);
         new EnergyReceiver().register(plugin);
+        new AutoRefinedSmeltery().register(plugin);
+        new AutoMetalForge().register(plugin);
+        new AutoManualMill().register(plugin);
     }
 }
