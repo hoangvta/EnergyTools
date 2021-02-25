@@ -44,7 +44,7 @@ public class EnergyReceiver extends SlimefunItem implements InventoryBlock, Ener
     private static final int CAPACITY = 1000000;
     private static final int LINKED_SLOT = 4;
 
-    private static final CustomItem linkedItem = new CustomItem(Material.PURPLE_STAINED_GLASS_PANE, "&7Linked unit: null");
+    private static final CustomItem linkedItem = new CustomItem(Material.RED_STAINED_GLASS_PANE, "&4Transmitter location: Offline");
 
     public EnergyReceiver() {
         super(Items.ENERGYTOOLS, Items.ENERGY_RECEIVER,
@@ -178,11 +178,8 @@ public class EnergyReceiver extends SlimefunItem implements InventoryBlock, Ener
             inv.replaceExistingItem(LINKED_SLOT, linkedItem);
             return;
         }
-        int x = Integer.parseInt(loc.split(" X: ")[1].split(" Y: ")[0]);
-        int y = Integer.parseInt(loc.split(" Y: ")[1].split(" Z: ")[0]);
-        int z = Integer.parseInt(loc.split(" Z: ")[1]);
 
-        CustomItem panel = new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&7Linked unit: " + loc);
+        CustomItem panel = new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&2Transmitter location: &6" + loc);
 
         inv.replaceExistingItem(LINKED_SLOT, panel);
     }
@@ -228,7 +225,7 @@ public class EnergyReceiver extends SlimefunItem implements InventoryBlock, Ener
         String loc = lore.get(2);
 
         final int stored = getCharge(l);
-        final boolean canGenerate = stored < getCapacity();
+        boolean canGenerate = stored < getCapacity();
 
         loc = loc.replace(ChatColors.color("&8\u21E8 &7Linked to: &8"), "");
         World world = Bukkit.getWorld(loc.split(" X: ")[0]);
@@ -241,24 +238,37 @@ public class EnergyReceiver extends SlimefunItem implements InventoryBlock, Ener
             return 0;
         }
 
-        Block send = world.getBlockAt(x, y, z);
+        Block transmitter = world.getBlockAt(x, y, z);
 
-        final int rate = canGenerate ? getGeneratingAmount(send.getLocation(), l) : 0;
+        if (!BlockStorage.check(transmitter, Items.ENERGY_TRANSMITTER.getItemId())) {
+            inv.replaceExistingItem(LINKED_SLOT, linkedItem);
+            return 0;
+        }
+
+        final int rate = canGenerate ? getGeneratingAmount(transmitter.getLocation(), l) : 0;
+
+        setGeneratingLore(inv, rate, loc);
 
         return rate;
     }
 
-    private int getGeneratingAmount(Location send, Location receive) {
+    private int getGeneratingAmount(Location sender, Location receiver) {
 
-        int senderCanSendAmount = getCharge(send);
+        int senderCanSendAmount = getCharge(sender);
         final boolean canCharge = senderCanSendAmount > 0;
 
-        int receiverHasAmount = getCharge(receive);
+        int receiverHasAmount = getCharge(receiver);
         int receiverCanChargingAmount =  senderCanSendAmount;
         if (receiverCanChargingAmount > CAPACITY) receiverCanChargingAmount = CAPACITY - receiverHasAmount;
-        if (canCharge) removeCharge(send, receiverCanChargingAmount);
+        if (canCharge) removeCharge(sender, receiverCanChargingAmount);
 
         return receiverCanChargingAmount;
+    }
+
+    private void setGeneratingLore(BlockMenu inv, int generateAmount, String loc) {
+        CustomItem generateInfo = new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&2Transmitter location: &6World: " + loc,
+                "", "&7Currently receiving: &6" + generateAmount + " J/t");
+        inv.replaceExistingItem(LINKED_SLOT, generateInfo);
     }
 
     @Override

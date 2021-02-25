@@ -52,7 +52,7 @@ public class TransmittingCard extends SimpleSlimefunItem<ItemUseHandler> {
 
                 if (e.getSlimefunBlock().get() instanceof EnergyTransmitter) {
                     if (!SlimefunPlugin.getProtectionManager().hasPermission(p, b.getLocation(), ProtectableAction.INTERACT_BLOCK)
-                            || p.hasPermission("slimefun.inventory.bypass")) {
+                            || !p.hasPermission("slimefun.inventory.bypass")) {
                         p.sendMessage(ChatColors.color("&4You are not permitted to access this block"));
                         return;
                     }

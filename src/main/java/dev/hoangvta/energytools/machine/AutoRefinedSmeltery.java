@@ -14,7 +14,7 @@ public class AutoRefinedSmeltery extends AutoCrafter{
         super(Items.ENERGYTOOLS, Items.AUTO_REFINED_SMELTERY, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
                 dev.j3fftw.litexpansion.Items.POWER_UNIT, dev.j3fftw.litexpansion.Items.ADVANCED_CIRCUIT, SlimefunItems.ENRICHED_NETHER_ICE,
                 dev.j3fftw.litexpansion.Items.IRIDIUM_PLATE, dev.j3fftw.litexpansion.Items.ADVANCED_MACHINE_BLOCK, dev.j3fftw.litexpansion.Items.IRIDIUM_PLATE,
-                SlimefunItems.ELECTRIC_SMELTERY_2, SlimefunItems.AUTOMATED_CRAFTING_CHAMBER, SlimefunItems.ELECTRIC_SMELTERY_2
+                SlimefunItems.ELECTRIC_SMELTERY, SlimefunItems.AUTOMATED_CRAFTING_CHAMBER, SlimefunItems.ELECTRIC_SMELTERY
         }, "&6Auto Refined Smeltery", Material.BLAST_FURNACE, "&6Auto Refined Smeltery", RefinedSmeltery.RECIPE_TYPE);
     }
 
