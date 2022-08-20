@@ -1,6 +1,7 @@
 # EnergyTools
 
-This addon add some end-game machines.
+Slimefun & LiteXpansion addon.
+This addon will add some end-game machines.
 
 # Downloads
 
